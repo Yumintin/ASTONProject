@@ -36,7 +36,6 @@ public class Main {
         int method = Integer.parseInt(input);
 
         String methodSelected = methodSelected(method, selectedClass);
-        //System.out.println("Вы выбрали метод " + methodSelected);
 
     }
 
