@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Application Log ###
+*.log
+
+### Misc stuff ###
+~.java
+*.bat
