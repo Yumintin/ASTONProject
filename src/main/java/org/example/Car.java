@@ -7,7 +7,7 @@ public class Car {
     private final int year; // Год производства
 
     // Конструктор, используемый Builder-ом
-    private Car(Builder builder) {
+    public Car(Builder builder) {
         this.power = builder.power;
         this.model = builder.model;
         this.year = builder.year;
