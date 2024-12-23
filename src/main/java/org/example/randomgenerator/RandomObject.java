@@ -1,2 +1,4 @@
-package org.example.randomgenerator;public class randomObject {
+package org.example.randomgenerator;
+
+public class RandomObject {
 }
