@@ -31,15 +31,15 @@ class MergeSort<T> implements SortStrategy<T> {
                         return ((Comparable<Object>) value1).compareTo(value2);
                     } else {
                         throw new IllegalArgumentException(
-                                "Ошибка. Поля не сравниваемые: " + value1 + ", " + value2
+                                "Field values are not comparable: " + value1 + ", " + value2
                         );
                     }
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException("Ошибка при доступе к полю : " + fieldName, e);
+                    throw new RuntimeException("Error accessing field : " + fieldName, e);
                 }
             });
         } catch (NoSuchFieldException e) {
-            throw new RuntimeException("Ошибка. Поле не найдено: " + fieldName, e);
+            throw new RuntimeException("Field not found: " + fieldName, e);
         }
     }
 }
