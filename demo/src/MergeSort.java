@@ -5,14 +5,13 @@ import java.util.List;
 class MergeSort<T> implements SortStrategy<T> {
     @Override
     public void sort(List<T> list, String fieldName) {
-        try {
-            // Предварительно кэшируем объект Field
-            if (list.isEmpty()) {
-                return; // Если список пуст, сортировать нечего
-            }
+        if (list == null || list.isEmpty()) {
+            return; // Если список null или пуст, сортировать нечего
+        }
 
+        try {
             // Получаем класс первого элемента списка
-            Class<?> clazz = list.get(0).getClass();
+            Class<?> clazz = list.getFirst().getClass();
 
             // Находим нужное поле и делаем его доступным
             Field field = clazz.getDeclaredField(fieldName);
@@ -30,15 +29,15 @@ class MergeSort<T> implements SortStrategy<T> {
                         return ((Comparable<Object>) value1).compareTo(value2);
                     } else {
                         throw new IllegalArgumentException(
-                                "Field values are not comparable: " + value1 + ", " + value2
+                                "Ошибка. Поля не сравниваемые: " + value1 + ", " + value2
                         );
                     }
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException("Error accessing field: " + fieldName, e);
+                    throw new RuntimeException("Ошибка при доступе к полю : " + fieldName, e);
                 }
             });
         } catch (NoSuchFieldException e) {
-            throw new RuntimeException("Field not found: " + fieldName, e);
+            throw new RuntimeException("Ошибка. Поле не найдено: " + fieldName, e);
         }
     }
 }
