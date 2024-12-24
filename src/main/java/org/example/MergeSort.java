@@ -1,26 +1,28 @@
 package org.example;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 
 // Универсальная стратегия сортировки
 class MergeSort<T> implements SortStrategy<T> {
     @Override
-    public void sort(List<T> list, String fieldName) {
-        if (list == null || list.isEmpty()) {
+    public void sort(T[] array, String fieldName) {
+        if (array == null || array.length == 0) {
             return; // Если список null или пуст, сортировать нечего
         }
 
         try {
             // Получаем класс первого элемента списка
-            Class<?> clazz = list.getFirst().getClass();
+            Class<?> clazz = array[0].getClass();
 
             // Находим нужное поле и делаем его доступным
             Field field = clazz.getDeclaredField(fieldName);
             field.setAccessible(true);
 
-            // Сортируем список
-            list.sort((o1, o2) -> {
+            // Сортируем массив с использованием компаратора
+            Arrays.sort(array, (o1, o2) -> {
                 try {
                     // Извлекаем значения полей
                     Object value1 = field.get(o1);
@@ -35,7 +37,7 @@ class MergeSort<T> implements SortStrategy<T> {
                         );
                     }
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException("Error accessing field : " + fieldName, e);
+                    throw new RuntimeException("Error accessing field: " + fieldName, e);
                 }
             });
         } catch (NoSuchFieldException e) {

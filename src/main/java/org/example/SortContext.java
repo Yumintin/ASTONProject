@@ -9,10 +9,10 @@ class SortContext<T> {
         this.strategy = strategy;
     }
 
-    public void executeSort(List<T> list, String fieldName) {
+    public void executeSort(T[] array, String fieldName) {
         if (strategy == null) {
-            throw new IllegalStateException("SortStrategy is not set ");
+            throw new IllegalStateException("SortStrategy is not set");
         }
-        strategy.sort(list, fieldName);
+        strategy.sort(array, fieldName);
     }
 }
