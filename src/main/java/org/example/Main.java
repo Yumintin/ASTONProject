@@ -1,6 +1,5 @@
 package org.example;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,33 +13,66 @@ public class Main {
 	}
 
 	public void initialize() throws IOException {
-		log.msg("Инициализация интерфейса программы...");
+		System.out.println("Инициализация интерфейса программы...");
 		Scanner scanner = new Scanner(System.in);
+		String input;
 
-		System.out.println("Добро пожаловать в программу Aston");
-		//System.out.println("Для выхода из программы введите end");
+		System.out.println("\nДобро пожаловать в программу \"Aston\"");
+		System.out.println("Для выхода из программы введите end");
 
-		System.out.println("Выберите класс: ");
-		System.out.println("1. Автомобиль");
-		System.out.println("2. Книга");
-		System.out.println("3. Корнеплод");
+		do {
+			System.out.println("\nВыберите класс: ");
+			System.out.println("1.\tАвтомобиль");
+			System.out.println("2.\tКнига");
+			System.out.println("3.\tКорнеплод");
 
-		String input = scanner.nextLine();
+			input = scanner.nextLine().trim();
+			if (input.equalsIgnoreCase("end")) {
+				break;
+			}
 
-		int operation = Integer.parseInt(input);
-		String selectedClass = classSelected(operation);
-		System.out.println("Вы выбрали класс " + selectedClass);
+			try {
+				int operation = Integer.parseInt(input);
+				String selectedClass = classSelected(operation);
+				if (selectedClass.isEmpty()) {
+					continue;
+				}
+				System.out.println("Вы выбрали класс " + selectedClass);
+				System.out.println(" =========================");
 
-		System.out.println(" =========================");
-		System.out.println("Выберите метод заполнения:");
-		System.out.println("1. Ручной");
-		System.out.println("2. Рандомный");
-		System.out.println("3. Из файла");
+				boolean validMethodSelected;
+				do {
+					validMethodSelected = true;
+					System.out.println("Выберите метод заполнения:");
+					System.out.println("1.\tРучной");
+					System.out.println("2.\tРандомный");
+					System.out.println("3.\tИз файла");
+					System.out.println("0.\tВернуться к выбору класса");
 
-		input = scanner.nextLine();
-		int method = Integer.parseInt(input);
+					input = scanner.nextLine().trim();
+					if (input.equalsIgnoreCase("end")) {
+						break;
+					}
 
-		String methodSelected = methodSelected(method, selectedClass);
+					int method = Integer.parseInt(input);
+					if (method == 0) {
+						continue;
+					}
+
+					String methodSelected = methodSelected(method, selectedClass);
+					if (methodSelected.isEmpty()) {
+						validMethodSelected = false;
+					}
+				} while (!validMethodSelected && !input.equalsIgnoreCase("end"));
+
+			} catch (NumberFormatException e) {
+				System.out.println("Неверный ввод. Введите число.");
+			} catch (IOException e) {
+				System.out.println("При обработке файла произошла ошибка: " + e.getMessage());
+			}
+		} while (!input.equalsIgnoreCase("end"));
+		System.out.println("Выход...");
+		scanner.close();
 	}
 
 	private static String classSelected(int operation) {
@@ -57,8 +89,8 @@ public class Main {
 				break;
 			default:
 				System.out.println("Такой операции нет");
+				return "";
 		}
-
 		return selectedClass;
 	}
 
@@ -94,6 +126,7 @@ public class Main {
 
 			default:
 				System.out.println("Такой операции нет");
+				return "";
 		}
 		return selectedMethod;
 	}
