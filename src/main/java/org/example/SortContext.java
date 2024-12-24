@@ -11,7 +11,7 @@ class SortContext<T> {
 
     public void executeSort(List<T> list, String fieldName) {
         if (strategy == null) {
-            throw new IllegalStateException("SortStrategy is not set");
+            throw new IllegalStateException("SortStrategy is not set ");
         }
         strategy.sort(list, fieldName);
     }
