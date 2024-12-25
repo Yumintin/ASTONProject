@@ -1,4 +1,7 @@
 package org.example.CustomClasses;
+
+import java.util.Comparator;
+
 // Класс "Корнеплод" с использованием паттерна Builder и валидацией
 public class RootVegetable {
     // Поля класса
@@ -72,5 +75,17 @@ public class RootVegetable {
                 ", вес=" + weight +
                 ", цвет='" + color + '\'' +
                 '}';
+    }
+    class RootVegetableComparator implements Comparator<RootVegetable> {
+        @Override
+        public int compare(RootVegetable r1, RootVegetable r2) {
+            int typeComparison = r1.getType().compareTo(r2.getType());
+            if (typeComparison != 0) return typeComparison;
+
+            int weightComparison = Double.compare(r1.getWeight(), r2.getWeight());
+            if (weightComparison != 0) return weightComparison;
+
+            return r1.getColor().compareTo(r2.getColor());
+        }
     }
 }
