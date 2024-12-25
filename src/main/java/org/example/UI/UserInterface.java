@@ -1,4 +1,5 @@
-package org.example;
+package org.example.UI;
+
 import java.util.Scanner;
 
 public class UserInterface {
@@ -19,6 +20,7 @@ public class UserInterface {
 		System.out.println("1. Ручной");
 		System.out.println("2. Рандомный");
 		System.out.println("3. Из файла");
+		System.out.println("0. Возврат");
 	}
 
 	public void chooseOperation() {
@@ -40,10 +42,6 @@ public class UserInterface {
 			default:
 				return "";
 		}
-	}
-
-	public Scanner getScanner() {
-		return scanner;
 	}
 
 	public String getInput() {

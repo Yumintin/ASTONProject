@@ -1,4 +1,5 @@
-package org.example;
+package org.example.UI;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class SelectedHandler {
 		while (true) {
 			ui.chooseMethod();
 			String input = ui.getInput();
-			if ("end".equalsIgnoreCase(input)) {
+			if ("0".equalsIgnoreCase(input)) {
 				break;
 			}
 			try {
@@ -28,7 +29,7 @@ public class SelectedHandler {
 						return;
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("Неверный формат ввода.");
+				System.out.println("Неверный ввод. Введите число.");
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}

@@ -4,9 +4,9 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.example.Book;
-import org.example.Car;
-import org.example.RootVegetable;
+import org.example.CustomClasses.Book;
+import org.example.CustomClasses.Car;
+import org.example.CustomClasses.RootVegetable;
 
 import java.io.File;
 import java.io.FileInputStream;

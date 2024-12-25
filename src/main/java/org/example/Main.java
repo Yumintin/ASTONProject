@@ -1,4 +1,8 @@
 package org.example;
+import org.example.UI.InputHandler;
+import org.example.UI.SelectedHandler;
+import org.example.UI.UserInterface;
+
 import java.io.IOException;
 
 public class Main {
@@ -8,10 +12,11 @@ public class Main {
 		InputHandler inputHandler = new InputHandler(ui);
 		SelectedHandler select = new SelectedHandler(ui);
 		String input;
+
 		System.out.println("\nДобро пожаловать в программу \"Aston\"");
 		System.out.println("Для выхода из программы введите end");
 		do {
-			ui.chooseClass ();
+			ui.chooseClass();
 			input = ui.getInput().trim();
 			if (input.equalsIgnoreCase("end")) {
 				break;
@@ -23,7 +28,7 @@ public class Main {
 					continue;
 				}
 				System.out.println("Был выбран класс: " + selectedClass +
-						"\n=========================");
+									"\n=========================");
 
 				select.methodSelected (selectedClass, inputHandler);
 			} catch (NumberFormatException e) {

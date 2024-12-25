@@ -1,7 +1,14 @@
-package org.example;
+package org.example.UI;
+
+import org.example.CustomClasses.Book;
+import org.example.CustomClasses.Car;
+import org.example.CustomClasses.RootVegetable;
+import org.example.MergeSort.MergeSort;
+import org.example.MergeSort.SortContext;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 public class InputHandler {
 	private UserInterface ui;
@@ -104,26 +111,28 @@ public class InputHandler {
 	public void sorting(Object[] array, String selectedClass) {
 		SortContext<Object> sortContext = new SortContext<>();
 		sortContext.setStrategy(new MergeSort<>());
-		Scanner scanner = ui.getScanner();
-
-		System.out.print("Выберите сортировку по полю: ");
-		if ("Car".equals(selectedClass)) {
-			System.out.print("power,model,year");
-		} else if ("Book".equals(selectedClass)) {
-			System.out.print("author,title,pages");
-		} else if ("RootVegetable".equals(selectedClass)) {
-			System.out.print("type,weight,color");
-		}
-
-		String fieldName = scanner.nextLine().trim();
+		Comparator<Object> comparator = (Comparator<Object>) getComparator(selectedClass);
 		try {
-			sortContext.executeSort(array, fieldName);
+			sortContext.executeSort(array, comparator);
 			System.out.println("Отсортированные объекты:");
 			for (Object obj : array) {
 				System.out.println(obj.toString());
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+	}
+
+	private Comparator<?> getComparator(String selectedClass) {
+		switch (selectedClass) {
+			case "Car":
+				return Car.getComparator();
+			case "Book":
+				return Book.getComparator();
+			case "RootVegetable":
+				return RootVegetable.getComparator();
+			default:
+				return null;
 		}
 	}
 }
