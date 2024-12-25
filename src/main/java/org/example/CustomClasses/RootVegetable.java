@@ -1,4 +1,10 @@
-package org.example;
+package org.example.CustomClasses;
+
+import org.example.Comparators.CarComparator;
+import org.example.Comparators.RootVegetableComparator;
+
+import java.util.Comparator;
+
 // Класс "Корнеплод" с использованием паттерна Builder и валидацией
 public class RootVegetable {
     // Поля класса
@@ -72,5 +78,8 @@ public class RootVegetable {
                 ", вес=" + weight +
                 ", цвет='" + color + '\'' +
                 '}';
+    }
+    public static Comparator<RootVegetable> getComparator() {
+        return new RootVegetableComparator();
     }
 }

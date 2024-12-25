@@ -1,4 +1,10 @@
-package org.example;
+package org.example.CustomClasses;
+
+import org.example.Comparators.BookComparator;
+import org.example.Comparators.CarComparator;
+
+import java.util.Comparator;
+
 //Класс "Книга" с использованием паттерна Builder и валидацией
 public class Book {
     // Поля класса
@@ -72,5 +78,8 @@ public class Book {
                 ", название='" + title + '\'' +
                 ", количествоСтраниц=" + pages +
                 '}';
+    }
+    public static Comparator<Book> getComparator() {
+        return new BookComparator();
     }
 }

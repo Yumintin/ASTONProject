@@ -1,4 +1,9 @@
-package org.example;
+package org.example.CustomClasses;
+
+import org.example.Comparators.CarComparator;
+
+import java.util.Comparator;
+
 // Класс "Автомобиль" с использованием паттерна Builder и валидацией
 public class Car {
     // Поля класса
@@ -72,5 +77,9 @@ public class Car {
                 ", модель='" + model + '\'' +
                 ", годПроизводства=" + year +
                 '}';
+    }
+
+    public static Comparator<Car> getComparator() {
+        return new CarComparator();
     }
 }
