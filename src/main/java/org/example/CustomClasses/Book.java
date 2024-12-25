@@ -1,5 +1,8 @@
 package org.example.CustomClasses;
 
+import org.example.Comparators.BookComparator;
+import org.example.Comparators.CarComparator;
+
 import java.util.Comparator;
 
 //Класс "Книга" с использованием паттерна Builder и валидацией
@@ -76,16 +79,7 @@ public class Book {
                 ", количествоСтраниц=" + pages +
                 '}';
     }
-    class BookComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book b1, Book b2) {
-            int authorComparison = b1.getAuthor().compareTo(b2.getAuthor());
-            if (authorComparison != 0) return authorComparison;
-
-            int titleComparison = b1.getTitle().compareTo(b2.getTitle());
-            if (titleComparison != 0) return titleComparison;
-
-            return Integer.compare(b1.getPages(), b2.getPages());
-        }
+    public static Comparator<Book> getComparator() {
+        return new BookComparator();
     }
 }
