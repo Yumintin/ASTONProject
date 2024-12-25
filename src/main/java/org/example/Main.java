@@ -1,20 +1,9 @@
 package org.example;
 
-import org.example.BinarySearch.BinarySearch;
-import org.example.CustomClasses.Book;
-import org.example.CustomClasses.Car;
-import org.example.Comparators.*;
-import org.example.CustomClasses.RootVegetable;
-import org.example.ReadFile.DataLoader;
-import org.example.RandomGeneration.RandomDataGenerator;
-
-import javax.smartcardio.CardChannel;
-import java.util.Comparator;
-
 public class Main {
     public static void main(String[] args) {
         {
-            /* КАК ЧИТАТЬ С ФАЙЛА
+            /* /////////////////////КАК ЧИТАТЬ С ФАЙЛА
             Car[] cars = (Car[]) DataLoader.loadFromFile("car"); // Загрузка данных для Car
             for (Car car : cars) {
                 System.out.println(car); // Печатаем данные для проверки
@@ -30,13 +19,38 @@ public class Main {
             }
              */
 
-            /* РАНДОМНОЕ ЗАПОЛНЕНИЕ
+            /* ///////////////////////РАНДОМНОЕ ЗАПОЛНЕНИЕ
             Car[] cars = RandomDataGenerator.generateRandomCars(5);
             for (Car car : cars) {
                 System.out.println(car); // Печатаем данные для проверки
             }*/
+            /* //////////////////////////СОРТИРОВКА
+            Car[] cars = {   //создаем массив
+                    new Car.Builder().setModel("Ford").setPower(120).setYear(2020).build(),
+                    new Car.Builder().setModel("Toyota").setPower(240).setYear(2010).build(),
+                    new Car.Builder().setModel("BMW").setPower(300).setYear(2014).build()
+            };
+         //выбираем компаратор для сравнения
+            Comparator<Car> carComparator = Car.getComparator();
 
-            /* ПОИСК БИНАРНЫЙ
+            // Создание контекста сортировки и задания стратегии
+            SortContext<Car> sortContext = new SortContext<>();
+            sortContext.setStrategy(new MergeSort<>());
+
+            // Вывод массива до сортировки
+            System.out.println("До сортировки:");
+            for (Car car : cars) {
+                System.out.println(car); // Печатаем данные для проверки
+            }
+            // Выполнение сортировки
+            sortContext.executeSort(cars, carComparator);
+
+            // Вывод массива после сортировки
+            System.out.println("\nПосле сортировки:");
+            for (Car car : cars) {
+                System.out.println(car); // Печатаем данные для проверки
+            }
+            /* ////////////////////////////ПОИСК БИНАРНЫЙ
             // Создаем и сортируем массив автомобилей
             Car[] cars = {
                     new Car.Builder().setModel("Ford").setPower(120).setYear(2020).build(),
