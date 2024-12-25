@@ -1,4 +1,4 @@
-package org.example;
+package org.example.CustomClasses;
 // Класс "Автомобиль" с использованием паттерна Builder и валидацией
 public class Car {
     // Поля класса

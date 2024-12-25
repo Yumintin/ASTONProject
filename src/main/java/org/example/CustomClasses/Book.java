@@ -1,4 +1,4 @@
-package org.example;
+package org.example.CustomClasses;
 //Класс "Книга" с использованием паттерна Builder и валидацией
 public class Book {
     // Поля класса

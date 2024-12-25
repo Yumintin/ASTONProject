@@ -1,4 +1,4 @@
-package org.example;
+package org.example.CustomClasses;
 // Класс "Корнеплод" с использованием паттерна Builder и валидацией
 public class RootVegetable {
     // Поля класса
