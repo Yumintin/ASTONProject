@@ -2,6 +2,7 @@ package org.example.UI;
 
 import org.example.CustomClasses.*;
 import org.example.RandomGeneration.*;
+import org.example.ReadFile.DataWriter;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,12 +61,12 @@ public class SelectedHandler {
 			boolean exit = false;   // Булевое значение для работы с выходом из цикла
 			while (!exit) {
 				// Вывод меню для выбора того, что нужно делать
-				handler.sorting(array, selectedClass);//сортируем
+				handler.sorting(array, selectedClass);              // Сортируем
+				DataWriter.write(handler.getDataAsString(array));   // Вывод в файл результата
 				ui.chooseOperation();
 				String choose = ui.line("");
 				switch (choose) {
 					case "1":   // Поиск
-
 						break;
 					case "2":   // Запись значений в файл
 						break;
