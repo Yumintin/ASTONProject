@@ -28,9 +28,7 @@ public class UserInterface {
 	// Вывод в консоль выбора операций с полученными данными
 	public void chooseOperation() {
 		System.out.println("\nМассив отсортирован!\nВыберите операцию:");
-		System.out.println("1. Сортировка");
-		System.out.println("2. Поиск");
-		System.out.println("3. Вывод в файл");
+		System.out.println("1. Поиск");
 		System.out.println("0. Возврат в прошлое меню");
 	}
 

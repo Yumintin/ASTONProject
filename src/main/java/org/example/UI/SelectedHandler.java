@@ -17,8 +17,8 @@ public class SelectedHandler {
 	}
 
 	// Функция для выбора метода заполнения данных
-	public List<?> methodSelected(String selectedClass, InputHandler handler, int arrayLength) {
-		List<?> array = null;
+	public Object[] methodSelected(String selectedClass, InputHandler handler, int arrayLength) {
+		Object[] array = null;
 
 			// Вызываем вывод сообщения в консоль
 			ui.chooseMethod();
@@ -39,15 +39,15 @@ public class SelectedHandler {
 						break;
 					case 2:
 						array = switch (selectedClass) {
-							case "Car" -> List.of(RandomDataGenerator.generateRandomCars(arrayLength));
-							case "Book" -> List.of(RandomDataGenerator.generateRandomBooks(arrayLength));
+							case "Car" -> RandomDataGenerator.generateRandomCars(arrayLength);
+							case "Book" -> RandomDataGenerator.generateRandomBooks(arrayLength);
 							case "RootVegetable" ->
-									List.of(RandomDataGenerator.generateRandomRootVegetable(arrayLength));
+									RandomDataGenerator.generateRandomRootVegetable(arrayLength);
 							default -> null;
 						};// Выбираем генерацию случайных значений для заполнения массива
 						break;
 					case 3:     // Выбираем ввод данных из файла
-						array = List.of(DataLoader.loadFromFile(selectedClass, arrayLength));
+						array = DataLoader.loadFromFile(selectedClass, arrayLength);
 						break;
 					default:
 						return null; // Возврат в случае неверного ввода
