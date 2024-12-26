@@ -22,16 +22,16 @@ public class UserInterface {
 		System.out.println("1. Ручной");
 		System.out.println("2. Рандомный");
 		System.out.println("3. Из файла");
-		System.out.println("0. Возврат");
+		System.out.println("0. Возврат в прошлое меню");
 	}
 
 	// Вывод в консоль выбора операций с полученными данными
 	public void chooseOperation() {
-		System.out.println("\nВыберите операцию:");
+		System.out.println("\nМассив отсортирован!\nВыберите операцию:");
 		System.out.println("1. Сортировка");
 		System.out.println("2. Поиск");
 		System.out.println("3. Вывод в файл");
-		System.out.println("0. Вернуться к выбору класса");
+		System.out.println("0. Возврат в прошлое меню");
 	}
 
 	// Сопоставение ввода с соответствующими именами классов.

@@ -60,14 +60,14 @@ public class SelectedHandler {
 			boolean exit = false;   // Булевое значение для работы с выходом из цикла
 			while (!exit) {
 				// Вывод меню для выбора того, что нужно делать
+				handler.sorting(array, selectedClass);//сортируем
 				ui.chooseOperation();
 				String choose = ui.line("");
 				switch (choose) {
-					case "1":   // Сортировка
-						handler.sorting(array, selectedClass);
+					case "1":   // Поиск
+
 						break;
-					case "2":   // Поиск
-					case "3":   // Запись значений в файл
+					case "2":   // Запись значений в файл
 						break;
 					case "0":   // Выход в предыдущее меню, если введен "0"
 						exit = true;
