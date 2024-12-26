@@ -1,4 +1,5 @@
 package org.example;
+import org.example.ReadFile.DataWriter;
 import org.example.UI.InputHandler;
 import org.example.UI.SelectedHandler;
 import org.example.UI.UserInterface;
@@ -11,6 +12,7 @@ public class Main {
 		UserInterface ui = new UserInterface();
 		InputHandler inputHandler = new InputHandler(ui);
 		SelectedHandler select = new SelectedHandler(ui);
+		DataWriter.write("","true");
 		String input;
 
 		System.out.println("\nДобро пожаловать в программу \"Aston\"");

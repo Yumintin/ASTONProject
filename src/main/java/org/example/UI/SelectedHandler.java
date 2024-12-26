@@ -62,7 +62,7 @@ public class SelectedHandler {
 			while (!exit) {
 				// Вывод меню для выбора того, что нужно делать
 				handler.sorting(array, selectedClass);              // Сортируем
-				DataWriter.write(handler.getDataAsString(array));   // Вывод в файл результата
+				DataWriter.write(handler.getDataAsString(array),"");   // Вывод в файл результата
 				ui.chooseOperation();
 				String choose = ui.line("");
 				switch (choose) {
