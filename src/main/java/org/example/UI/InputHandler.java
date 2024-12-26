@@ -21,29 +21,26 @@ public class InputHandler {
 		Отправляем отсюда вводить параметры вручную
 		В зависимости от выбранного класса
 	*/
-	public List<?> manual(String selectedClass) throws IllegalArgumentException {
+	public List<?> manual(String selectedClass,int arrayLength) throws IllegalArgumentException {
 		if ("Car".equals(selectedClass)) {                  // Проверяем, что выбрана машина
-			return inputCars(); // Вызов соотв. функции
+			return inputCars(arrayLength); // Вызов соотв. функции
 		} else if ("Book".equals(selectedClass)) {          // Проверяем, что выбрана книга
-			return inputBooks();
+			return inputBooks(arrayLength);
 		} else if ("RootVegetable".equals(selectedClass)) { // Проверяем, что выбран Виктор Корнеплод
-			return inputRoots();
+			return inputRoots(arrayLength);
 		}
 		// Если неверное имя класса, то даем исключение
 		throw new IllegalArgumentException("Невалидный класс");
 	}
 
 	// Функция для ручного ввода параметров автомобиля
-	private List<Car> inputCars() throws IllegalArgumentException {
+	private List<Car> inputCars(int arrayLength) throws IllegalArgumentException {
 		List<Car> cars = new ArrayList<>(); // Инициализируем список для хранения созданных объектов
-		while (true) {                      // Цикл на неопределенный срок, пока не будет введен "end"
+		for (int i=0;i<arrayLength;i++) {                      // Цикл основанный на длине массива
 			String input = ui.line("Введите параметры машины (мощность, модель, год)\n" +
-					"Для завершения ввода введите 'end':");
+					"До заполнения массива осталось:"+(arrayLength-i)+" шагов");
 
-			// Проверка на ввод "end
-			if ("end".equalsIgnoreCase(input)) {
-				break;
-			}
+
 
 			// В качестве разделителя параметров использовать "," для корректной логики ввода
 			String[] delimiter = input.split(",");
@@ -70,14 +67,12 @@ public class InputHandler {
 	}
 
 	/// Функция полностью повторяет логику функции inputCars
-	private List<Book> inputBooks() throws IllegalArgumentException {
+	private List<Book> inputBooks(int arrayLength) throws IllegalArgumentException {
 		List<Book> books = new ArrayList<>();
-		while (true) {
+		for (int i=0;i<arrayLength;i++) {
 			String input = ui.line("Введите параметры книги (автор, название, кол-во страниц)\n" +
-					"Для завершения ввода введите 'end':");
-			if ("end".equalsIgnoreCase(input)) {
-				break;
-			}
+					"До заполнения массива осталось:"+(arrayLength-i)+" шагов");
+
 			String[] delimiter = input.split(",");
 			if (delimiter.length != 3) {
 				System.out.println("Неверный тип записи. Введите значения через запятую.");
@@ -99,14 +94,12 @@ public class InputHandler {
 	}
 
 	/// Функция полностью повторяет логику функции inputCars
-	private List<RootVegetable> inputRoots() throws IllegalArgumentException {
+	private List<RootVegetable> inputRoots(int arrayLength) throws IllegalArgumentException {
 		List<RootVegetable> roots = new ArrayList<>();
-		while (true) {
+		for (int i=0;i<arrayLength;i++) {
 			String input = ui.line("Введите параметры корнеплода (тип, вес, цвет)\n" +
-					"Для завершения ввода введите 'end':");
-			if ("end".equalsIgnoreCase(input)) {
-				break;
-			}
+					"До заполнения массива осталось:"+(arrayLength-i)+" шагов");
+
 			String[] delimiter = input.split(",");
 			if (delimiter.length != 3) {
 				System.out.println("Неверный тип записи. Введите значения через запятую.");
