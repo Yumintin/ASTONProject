@@ -16,20 +16,28 @@ public class Main {
 		System.out.println("\nДобро пожаловать в программу \"Aston\"");
 		System.out.println("Для выхода из программы введите end");
 		do {
+			// Вызов сообщений в консоль для выбора класса
 			ui.chooseClass();
-			input = ui.getInput().trim();
+			// Обрабатываем пользовательский ввод
+			input = ui.getInput();
+
+			// Если введен "end" - выходим из программы
 			if (input.equalsIgnoreCase("end")) {
 				break;
 			}
 			try {
+				// Обрабатываем ввод и определяем какой класс был выбран
 				int operation = Integer.parseInt(input);
 				String selectedClass = ui.classSelected(operation);
+
+				// Если пусто, то повтрно выводим меню
 				if (selectedClass.isEmpty()) {
 					continue;
 				}
 				System.out.println("Был выбран класс: " + selectedClass +
 									"\n=========================");
 
+				// Вызов функции с выбором метода заполнения данных
 				select.methodSelected (selectedClass, inputHandler);
 			} catch (NumberFormatException e) {
 				System.out.println("Неверный ввод. Введите число.");
