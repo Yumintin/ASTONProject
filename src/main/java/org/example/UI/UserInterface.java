@@ -70,4 +70,10 @@ public class UserInterface {
 		System.out.println(message);
 		return scanner.nextLine().trim();
 	}
+
+	public void close() {
+		if (scanner != null) {
+			scanner.close ();
+		}
+	}
 }

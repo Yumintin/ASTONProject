@@ -100,13 +100,14 @@ public class Main {
 							return;
 					}
 				}
-
 			} catch (NumberFormatException e) {
 				System.out.println("Неверный ввод. Введите число.");
 			}
 		} while (!input.equalsIgnoreCase("end"));
 		System.out.println("Выход...");
+		ui.close();
 	}
+
 	public static <T> T[] castObjectArrayToArray(Object[] objectArray, Class<T> clazz) {
 		@SuppressWarnings("unchecked")
 		T[] result = (T[]) Array.newInstance(clazz, objectArray.length);
