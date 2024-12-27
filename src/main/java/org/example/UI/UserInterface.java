@@ -29,6 +29,7 @@ public class UserInterface {
 	public void chooseOperation() {
 		System.out.println("\nМассив отсортирован!\nВыберите операцию:");
 		System.out.println("1. Поиск");
+		System.out.println("2. Четная сортировка");
 		System.out.println("0. Возврат в прошлое меню");
 	}
 

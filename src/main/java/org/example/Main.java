@@ -1,6 +1,6 @@
 package org.example;
 import org.example.BinarySearch.BinarySearch;
-import org.example.CustomClasses.Car;
+import org.example.ReadFile.DataWriter;
 import org.example.UI.InputHandler;
 import org.example.UI.SelectedHandler;
 import org.example.UI.UserInterface;
@@ -17,6 +17,7 @@ public class Main {
 		UserInterface ui = new UserInterface();
 		InputHandler inputHandler = new InputHandler(ui);
 		SelectedHandler select = new SelectedHandler(ui);
+		DataWriter.write("", "true");
 		String input;
 
 		System.out.println("\nДобро пожаловать в программу \"Aston\"");
@@ -41,7 +42,7 @@ public class Main {
 					continue;
 				}
 				System.out.println("Был выбран класс: " + selectedClass +
-									"\n=========================");
+						"\n=========================");
 
 				Scanner scanner = new Scanner(System.in);
 				int desiredLength = -1; // Инициализируем переменную для длины массива
@@ -60,31 +61,41 @@ public class Main {
 				}
 
 				// Вызов функции с выбором метода заполнения данных
-				Object[] array=select.methodSelected (selectedClass, inputHandler, desiredLength);
-					System.out.println("до сортировки");
-					for (Object item : array) {
-						System.out.println(item);
-					}
-					inputHandler.sorting(array, selectedClass);//сортируем/// ////////////////////////////СЮДА ВЫВОД В ФАЙЛ
-					boolean exit = false;   // Булевое значение для работы с выходом из цикла
-					while (!exit) {
-						// Вывод меню для выбора того, что нужно делать
-						ui.chooseOperation();
-						String choose = ui.line("");
-						switch (choose) {
-							case "1": {
-								Comparator<Object> handlerComparator=(Comparator<Object>)inputHandler.getComparator(selectedClass);
-								Object key=inputHandler.classExReturner(selectedClass);
-								System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
-							}  // Поиск
-								break;
-							case "0":   // Выход в предыдущее меню, если введен "0"
-								exit = true;
-								break;
-							default:    // Повторный вызов при невалидном вводе
-								return;
+				Object[] array = select.methodSelected(selectedClass, inputHandler, desiredLength);
+				System.out.println("до сортировки");
+				for (Object item : array) {
+					System.out.println(item);
+				}
+				inputHandler.sorting(array, selectedClass);//сортируем/
+				DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
+				boolean exit = false;   // Булевое значение для работы с выходом из цикла
+				while (!exit) {
+					// Вывод меню для выбора того, что нужно делать
+					ui.chooseOperation();
+					String choose = ui.line("");
+					switch (choose) {
+						case "1": {
+							Comparator<Object> handlerComparator = (Comparator<Object>) inputHandler.getComparator(selectedClass);
+							Object key = inputHandler.classExReturner(selectedClass);
+							System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
+						}  // Поиск
+						case "2": { // Выход в предыдущее меню, если введен "0"
+							CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(array);
+							System.out.println("Отсортирован!");
+							for (Object item : array) {
+								System.out.println(item);
+							}
+							return;
 						}
+						case "0": {   // Выход в предыдущее меню, если введен "0"
+							exit = true;
+							break;
+						}
+						default:    // Повторный вызов при невалидном вводе
+							return;
 					}
+				}
+
 			} catch (NumberFormatException e) {
 				System.out.println("Неверный ввод. Введите число.");
 			}

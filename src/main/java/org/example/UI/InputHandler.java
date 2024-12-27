@@ -211,4 +211,13 @@ public class InputHandler {
 				return null;    // Если указан неизвестный класс.
 		}
 	}
+
+	// Преобразование отсортированного массива объектов в строку для записи в файл
+	public static String getDataAsString(Object[] array) {
+		StringBuilder str = new StringBuilder();
+		for (Object obj : array) {
+			str.append(obj.toString()).append("\n");
+		}
+		return str.toString();
+	}
 }
