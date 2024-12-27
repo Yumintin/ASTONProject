@@ -1,6 +1,8 @@
 package org.example;
 import org.example.BinarySearch.BinarySearch;
+import org.example.CustomClasses.Book;
 import org.example.CustomClasses.Car;
+import org.example.CustomClasses.RootVegetable;
 import org.example.MergeSort.CustomSorterEvenOdd;
 import org.example.ReadFile.DataWriter;
 import org.example.UI.InputHandler;
@@ -9,6 +11,7 @@ import org.example.UI.UserInterface;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -83,14 +86,12 @@ public class Main {
 							Object key = inputHandler.classExReturner(selectedClass);
 							System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
 						}  // Поиск
-						case "2": { // Выход в предыдущее меню, если введен "0"
-
-							//CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(cars);
+						case "2": { //
+							CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(reWriter(array,selectedClass));
 							System.out.println("Отсортирован!");
 							for (Object item : array) {
 								System.out.println(item);
 							}
-							return;
 						}
 						case "0": {   // Выход в предыдущее меню, если введен "0"
 							exit = true;
@@ -107,14 +108,17 @@ public class Main {
 		} while (!input.equalsIgnoreCase("end"));
 		System.out.println("Выход...");
 	}
-	public static <T> T[] castObjectArrayToArray(Object[] objectArray, Class<T> clazz) {
-		@SuppressWarnings("unchecked")
-		T[] result = (T[]) Array.newInstance(clazz, objectArray.length);
-		for (int i = 0; i < objectArray.length; i++) {
-			result[i] = clazz.cast(objectArray[i]);
-		}
-		return result;
+private <T> T[] reWriter(Object[] array,String selectedClass)
+{
+	if(selectedClass=="Car")
+		return (T[]) Arrays.copyOf(array,array.length,Car[].class);
+	else if (selectedClass=="Book") {
+		return (T[]) Arrays.copyOf(array,array.length, Book[].class);
+	} else if (selectedClass=="RootVegetable") {
+		return (T[]) Arrays.copyOf(array,array.length, RootVegetable[].class);
 	}
+    return null;
+}
 	public static void main(String[] args) {
 		try {
 			Main app = new Main();

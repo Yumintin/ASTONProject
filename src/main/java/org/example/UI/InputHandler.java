@@ -47,25 +47,25 @@ public class InputHandler {
 		while(true) {
 			String input = ui.line("Введите параметры машины в формате:\nмощность, модель, год\n");
 			// В качестве разделителя параметров использовать "," для корректной логики ввода
-			 delimiter = input.split(",");
+			delimiter = input.split(",");
 			// Если пользователь проставил != 3 запятых, то дать сообщение, что так делать нельзя
 
 			if (delimiter.length != 3) {
 				System.out.println("Неверный тип записи. Введите значения через запятую.");
+			} else break;
+
+			try {
+				// Определение и обрезка значений {int,String,int}
+				int power = Integer.parseInt(delimiter[0].trim());
+				String model = delimiter[1].trim();
+				int year = Integer.parseInt(delimiter[2].trim());
+
+				// Инициализируем новый объект через билдер
+				car = new Car.Builder().setPower(power).setModel(model).setYear(year).build();
+				break;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage()); // На всякий случай, если что-то пойдет не так
 			}
-			else break;
-		}
-		try {
-			// Определение и обрезка значений {int,String,int}
-			int power = Integer.parseInt(delimiter[0].trim());
-			String model = delimiter[1].trim();
-			int year = Integer.parseInt(delimiter[2].trim());
-
-			// Инициализируем новый объект через билдер
-			car = new Car.Builder().setPower(power).setModel(model).setYear(year).build();
-
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage()); // На всякий случай, если что-то пойдет не так
 		}
 		return car;
 	}
@@ -94,17 +94,19 @@ public class InputHandler {
 			} else {
 				break; // Если все параметры введены корректно, выходим из цикла
 			}
-		}
-		try {
-			// Определяем и обрезаем значения {String, String, int}
-			String author = delimiter[0].trim();
-			String title = delimiter[1].trim();
-			int pages = Integer.parseInt(delimiter[2].trim());
 
-			// Инициализируем новый объект через билдер
-			book = new Book.Builder().setAuthor(author).setTitle(title).setPages(pages).build();
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage()); // Обработка исключений на случай ошибок
+			try {
+				// Определяем и обрезаем значения {String, String, int}
+				String author = delimiter[0].trim();
+				String title = delimiter[1].trim();
+				int pages = Integer.parseInt(delimiter[2].trim());
+
+				// Инициализируем новый объект через билдер
+				book = new Book.Builder().setAuthor(author).setTitle(title).setPages(pages).build();
+				break;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage()); // Обработка исключений на случай ошибок
+			}
 		}
 
 		return book; // Возвращаем созданный объект книги

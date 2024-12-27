@@ -68,9 +68,22 @@ public class DataLoader {// Метод для загрузки данных из
 
     // Метод для выбора файла через графический интерфейс
     private static File selectFile() {
+        // Создаем временное окно для выбора файла
+        JFrame frame = new JFrame();
+        frame.setAlwaysOnTop(true); // Убедитесь, что окно всегда сверху
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Закрытие окна
+        frame.setVisible(false); // Делаем окно невидимым
+
         JFileChooser fileChooser = new JFileChooser(); // Создаем объект для выбора файла
         fileChooser.setDialogTitle("Выберите файл для загрузки данных"); // Устанавливаем заголовок диалога
-        int result = fileChooser.showOpenDialog(null); // Показываем диалоговое окно
+
+        // Устанавливаем текущую директорию на папку проекта
+        File projectDirectory = new File(System.getProperty("user.dir"));
+        fileChooser.setCurrentDirectory(projectDirectory); // Устанавливаем директорию
+
+        int result = fileChooser.showOpenDialog(frame); // Показываем диалоговое окно
+
+        frame.dispose(); // Закрываем временное окно после выбора файла
 
         if (result == JFileChooser.APPROVE_OPTION) {
             return fileChooser.getSelectedFile(); // Возвращаем выбранный файл

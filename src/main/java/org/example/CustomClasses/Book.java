@@ -2,11 +2,12 @@ package org.example.CustomClasses;
 
 import org.example.Comparators.BookComparator;
 import org.example.Comparators.CarComparator;
+import org.example.MergeSort.Sortable;
 
 import java.util.Comparator;
 
 //Класс "Книга" с использованием паттерна Builder и валидацией
-public class Book {
+public class Book implements Sortable {
     // Поля класса
     private final String author; // Автор книги
     private final String title; // Название книги
@@ -69,6 +70,10 @@ public class Book {
         public Book build() {
             return new Book(this);
         }
+    }
+    @Override
+    public Integer getSortField() {
+        return pages;  // Возвращаем значение возраста для сортировки
     }
 
     @Override

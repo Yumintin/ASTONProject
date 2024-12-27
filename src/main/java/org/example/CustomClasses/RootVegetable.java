@@ -2,11 +2,12 @@ package org.example.CustomClasses;
 
 import org.example.Comparators.CarComparator;
 import org.example.Comparators.RootVegetableComparator;
+import org.example.MergeSort.Sortable;
 
 import java.util.Comparator;
 
 // Класс "Корнеплод" с использованием паттерна Builder и валидацией
-public class RootVegetable {
+public class RootVegetable implements Sortable {
     // Поля класса
     private final String type; // Тип корнеплода
     private final double weight; // Вес корнеплода
@@ -70,7 +71,10 @@ public class RootVegetable {
             return new RootVegetable(this);
         }
     }
-
+    @Override
+    public Double getSortField() {
+        return weight;  // Возвращаем значение возраста для сортировки
+    }
     @Override
     public String toString() {
         return "RootVegetable{" +

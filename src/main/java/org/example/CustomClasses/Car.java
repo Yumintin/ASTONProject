@@ -1,11 +1,12 @@
 package org.example.CustomClasses;
 
 import org.example.Comparators.CarComparator;
+import org.example.MergeSort.Sortable;
 
 import java.util.Comparator;
 
 // Класс "Автомобиль" с использованием паттерна Builder и валидацией
-public class Car {
+public class Car implements Sortable {
     // Поля класса
     private final int power; // Мощность автомобиля
     private final String model; // Модель автомобиля
@@ -69,7 +70,10 @@ public class Car {
             return new Car(this);
         }
     }
-
+    @Override
+    public Integer getSortField() {
+        return year;  // Возвращаем значение возраста для сортировки
+    }
     @Override
     public String toString() {
         return "Car{" +
