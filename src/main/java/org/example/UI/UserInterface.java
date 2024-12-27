@@ -3,7 +3,7 @@ package org.example.UI;
 import java.util.Scanner;
 
 public class UserInterface {
-	private final Scanner scanner;
+	final Scanner scanner;
 	public UserInterface() {
 		this.scanner = new Scanner(System.in);
 	}

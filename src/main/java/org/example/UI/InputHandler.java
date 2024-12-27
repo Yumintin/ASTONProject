@@ -185,8 +185,7 @@ public class InputHandler {
 		try {
 			// Выполняем операцию сортировки, используя предоставленный компаратор
 			sortContext.executeSort(array, comparator);
-
-			System.out.println("Отсортированные объекты:");
+			System.out.println("\nОтсортированные объекты:");
 
 			// Проходим по отсортированному массиву для вывода в консоль каждого объекта
 			for (Object obj : array) {

@@ -1,24 +1,14 @@
 package org.example;
-import org.example.BinarySearch.BinarySearch;
-import org.example.CustomClasses.Book;
-import org.example.CustomClasses.Car;
-import org.example.CustomClasses.RootVegetable;
-import org.example.MergeSort.CustomSorterEvenOdd;
+
 import org.example.IO.DataWriter;
 import org.example.UI.InputHandler;
 import org.example.UI.SelectedHandler;
 import org.example.UI.UserInterface;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 	public void initialize() throws IOException {
-
 		System.out.println("Инициализация интерфейса программы...");
 		UserInterface ui = new UserInterface();
 		InputHandler inputHandler = new InputHandler(ui);
@@ -43,96 +33,33 @@ public class Main {
 				int operation = Integer.parseInt(input);
 				String selectedClass = ui.classSelected(operation);
 
-				// Если пусто, то повтрно выводим меню
+				// Если пусто, то повторно выводим меню
 				if (selectedClass.isEmpty()) {
 					continue;
 				}
 				System.out.println("Был выбран класс: " + selectedClass +
-						"\n=========================");
-
-				Scanner scanner = new Scanner(System.in);
-				int desiredLength = -1; // Инициализируем переменную для длины массива
-				// Цикл для запроса корректного ввода
-				while (desiredLength < 0) {
-					System.out.print("Введите размер массива (должен быть неотрицательным): ");
-					if (scanner.hasNextInt()) {
-						desiredLength = scanner.nextInt();
-						if (desiredLength < 0) {
-							System.out.println("Размер массива не может быть отрицательным. Попробуйте снова.");
-						}
-					} else {
-						System.out.println("Некорректный ввод. Пожалуйста, введите целое число.");
-						scanner.next(); // Очищаем некорректный ввод
-					}
-				}
+									"\n=========================");
+				// Инициализируем переменную для длины массива
+				int desiredLength = select.getArrayLength();
 
 				// Вызов функции с выбором метода заполнения данных
 				boolean method=true;
-				while(method){
+				while(method) {
 					Object[] array = select.methodSelected(selectedClass, inputHandler, desiredLength);
-
 					if (array != null) {
-						System.out.println("до сортировки");
-						for (Object item : array) {
-							System.out.println(item);
-						}
-						inputHandler.sorting(array, selectedClass);//сортируем
-						System.out.println("Массив отсортирован!");
-						DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
-						boolean exit = false;   // Булевое значение для работы с выходом из цикла
-						while (!exit) {
-							// Вывод меню для выбора того, что нужно делать
-							ui.chooseOperation();
-							String choose = ui.line("");
-							switch (choose) {
-								case "1": {
-									Comparator<Object> handlerComparator = (Comparator<Object>) inputHandler.getComparator(selectedClass);
-									Object key = inputHandler.classExReturner(selectedClass);
-									System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
-									break;
-								}  // Поиск
-								case "2": { //
-									CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(reWriter(array, selectedClass));
-									System.out.println("Отсортирован!");
-									for (Object item : array) {
-										System.out.println(item);
-									}
-									break;
-								}
-								case "0": {   // Выход в предыдущее меню, если введен "0"
-									exit = true;
-								}
-
-							}
-						}
-					}
-					else {
-						method=false;
+						select.arrayOperations(ui, inputHandler, select, array, selectedClass);
+					} else {
+						method = false;
 					}
 				}
-				} catch(NumberFormatException e){
-					System.out.println("Неверный ввод. Введите число.");
-				}
-
+			} catch(NumberFormatException e) {
+				System.out.println("Неверный ввод. Введите число.");
+			}
 		} while (!input.equalsIgnoreCase("end"));
-
-
-
 		System.out.println("Выход...");
 		ui.close();
 	}
-	
-private <T> T[] reWriter(Object[] array,String selectedClass)
-{
-	if(selectedClass=="Car")
-		return (T[]) Arrays.copyOf(array,array.length,Car[].class);
-	else if (selectedClass=="Book") {
-		return (T[]) Arrays.copyOf(array,array.length, Book[].class);
-	} else if (selectedClass=="RootVegetable") {
-		return (T[]) Arrays.copyOf(array,array.length, RootVegetable[].class);
-	}
-    return null;
-}
+
 	public static void main(String[] args) {
 		try {
 			Main app = new Main();
