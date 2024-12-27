@@ -77,7 +77,7 @@ public class Main {
 							System.out.println(item);
 						}
 						inputHandler.sorting(array, selectedClass);//сортируем
-
+						System.out.println("Массив отсортирован!");
 						DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
 						boolean exit = false;   // Булевое значение для работы с выходом из цикла
 						while (!exit) {
@@ -106,7 +106,9 @@ public class Main {
 							}
 						}
 					}
-					else method=false;
+					else {
+						method=false;
+					}
 				}
 				} catch(NumberFormatException e){
 					System.out.println("Неверный ввод. Введите число.");

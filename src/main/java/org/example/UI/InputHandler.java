@@ -44,16 +44,17 @@ public class InputHandler {
 	private Car inputCar(){
 		String[] delimiter;
 		Car car = null;
-		while(true) {
+
+		while (true) {
 			String input = ui.line("Введите параметры машины в формате:\nмощность, модель, год\n");
 			// В качестве разделителя параметров использовать "," для корректной логики ввода
 			delimiter = input.split(",");
-			// Если пользователь проставил != 3 запятых, то дать сообщение, что так делать нельзя
 
+			// Если пользователь проставил не 3 значения, вывести сообщение
 			if (delimiter.length != 3) {
 				System.out.println("Неверный тип записи. Введите значения через запятую.");
-			} else break;
-
+				continue; // Возвращаемся к началу цикла
+			}
 			try {
 				// Определение и обрезка значений {int,String,int}
 				int power = Integer.parseInt(delimiter[0].trim());
@@ -62,12 +63,14 @@ public class InputHandler {
 
 				// Инициализируем новый объект через билдер
 				car = new Car.Builder().setPower(power).setModel(model).setYear(year).build();
-				break;
+				break; // Выход из цикла, если объект успешно создан
+			} catch (NumberFormatException e) {
+				System.out.println("Ошибка: мощность и год должны быть целыми числами. Пожалуйста, попробуйте снова.");
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage()); // На всякий случай, если что-то пойдет не так
 			}
 		}
-		return car;
+		return car; // Возвращаем созданный объект или null, если произошла ошибка
 	}
 	// Функция для ручного ввода параметров автомобиля
 	private Car[] inputCars(int arrayLength) throws IllegalArgumentException {
@@ -87,14 +90,11 @@ public class InputHandler {
 		while (true) {
 			String input = ui.line("Введите параметры книги в формате:\nавтор, название, кол-во страниц\n");
 			delimiter = input.split(","); // Разделяем ввод по запятой
-
 			// Проверяем, что введено ровно 3 параметра
 			if (delimiter.length != 3) {
 				System.out.println("Неверный тип записи. Введите значения через запятую.");
-			} else {
-				break; // Если все параметры введены корректно, выходим из цикла
+				continue; // Возвращаемся к началу цикла
 			}
-
 			try {
 				// Определяем и обрезаем значения {String, String, int}
 				String author = delimiter[0].trim();
@@ -103,14 +103,16 @@ public class InputHandler {
 
 				// Инициализируем новый объект через билдер
 				book = new Book.Builder().setAuthor(author).setTitle(title).setPages(pages).build();
-				break;
+				break; // Выход из цикла, если объект успешно создан
+			} catch (NumberFormatException e) {
+				System.out.println("Ошибка: количество страниц должно быть целым числом. Пожалуйста, попробуйте снова.");
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage()); // Обработка исключений на случай ошибок
 			}
 		}
-
-		return book; // Возвращаем созданный объект книги
+		return book; // Возвращаем созданный объект книги или null, если произошла ошибка
 	}
+
 
 	// Метод для ввода массива книг
 	private Book[] inputBooks(int arrayLength) throws IllegalArgumentException {
@@ -133,19 +135,16 @@ public class InputHandler {
 		while (true) {
 			String input = ui.line("Введите параметры корнеплода (тип, вес, цвет)\n");
 			delimiter = input.split(","); // Разделяем ввод по запятой
-
 			// Проверяем, что введено ровно 3 параметра
 			if (delimiter.length != 3) {
 				System.out.println("Неверный тип записи. Введите значения через запятую.");
 				continue; // Запрашиваем ввод снова
 			}
-
 			try {
 				// Определение и обрезка значений {String, Double, String}
 				String type = delimiter[0].trim();
 				double weight = Double.parseDouble(delimiter[1].trim());
 				String color = delimiter[2].trim();
-
 				// Инициализируем новый объект через билдер
 				root = new RootVegetable.Builder().setType(type).setWeight(weight).setColor(color).build();
 				break; // Если объект создан успешно, выходим из цикла
@@ -155,9 +154,9 @@ public class InputHandler {
 				System.out.println(e.getMessage()); // Обработка исключений на случай ошибок
 			}
 		}
-
-		return root; // Возвращаем созданный объект корнеплода
+		return root; // Возвращаем созданный объект корнеплода или null, если произошла ошибка
 	}
+
 
 	// Метод для ввода массива корнеплодов
 	private RootVegetable[] inputRoots(int arrayLength) throws IllegalArgumentException {
