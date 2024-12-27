@@ -19,9 +19,9 @@ private static final String[] CAR_MODELS = {"Sedan", "Hatchback", "SUV", "Coupe"
         Car[] cars = new Car[count];
         for (int i = 0; i < count; i++) {
             cars[i] = new Car.Builder()
-                    .setPower(RANDOM.nextInt(101) + 100) // Случайная мощность от 100 до 200
+                    .setPower(RANDOM.nextInt(60,360)) // Случайная мощность в пределах серийных легковых автомобилей
                     .setModel(CAR_MODELS[RANDOM.nextInt(CAR_MODELS.length)])
-                    .setYear(2015 + RANDOM.nextInt(11)) // Случайный год от 2015 до 2025
+                    .setYear(1886 + RANDOM.nextInt(139)) // Случайный год от 1886 до 2024
                     .build();
         }
         return cars;

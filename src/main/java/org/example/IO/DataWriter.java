@@ -1,4 +1,4 @@
-package org.example.ReadFile;
+package org.example.IO;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

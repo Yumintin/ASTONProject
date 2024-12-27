@@ -50,10 +50,16 @@ public class UserInterface {
 	/*
 		Получаем то, что ввел пользователь без пробелов
 		для корректного заполнения данных, например
-		в тот-же массив при ручном вводе
+		в тот-же массив при ручном вводе, а также
+		убирает "0" в начале строки, для корректного
+		ввода int значений
 	*/
 	public String getInput() {
-		return scanner.nextLine().trim();
+		String input = scanner.nextLine().trim();
+		if (input.startsWith("0")) {
+			input = input.substring(1);
+		}
+		return input;
 	}
 
 	/*
@@ -63,5 +69,11 @@ public class UserInterface {
 	public String line(String message) {
 		System.out.println(message);
 		return scanner.nextLine().trim();
+	}
+
+	public void close() {
+		if (scanner != null) {
+			scanner.close ();
+		}
 	}
 }

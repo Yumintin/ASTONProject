@@ -1,6 +1,6 @@
 package org.example.UI;
 
-import org.example.CustomClasses.*;
+import org.example.IO.*;
 import org.example.RandomGeneration.*;
 import org.example.ReadFile.DataLoader;
 
