@@ -58,8 +58,8 @@ public class Book {
 
         // Метод для установки количества страниц
         public Builder setPages(int pages) {
-            if (pages <= 0) {
-                throw new IllegalArgumentException("Количество страниц должно быть положительным числом.");
+            if (pages <= 0 || pages >= 2000) {
+                throw new IllegalArgumentException("Количество страниц должно быть положительным числом и в допустимом пределе.");
             }
             this.pages = pages;
             return this;

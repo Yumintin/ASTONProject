@@ -39,8 +39,8 @@ public class Car {
 
         // Метод для установки мощности
         public Builder setPower(int power) {
-            if (power <= 0) {
-                throw new IllegalArgumentException("Мощность должна быть положительным числом.");
+            if (power <= 0 || power >= 2300) {
+                throw new IllegalArgumentException("Мощность двигателя должна быть положительным числом и в допустимом значении.");
             }
             this.power = power;
             return this;
