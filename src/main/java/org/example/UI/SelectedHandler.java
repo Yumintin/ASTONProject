@@ -18,49 +18,41 @@ public class SelectedHandler {
 	// Функция для выбора метода заполнения данных
 	public Object[] methodSelected(String selectedClass, InputHandler handler, int arrayLength) {
 		Object[] array = null;
-
-			// Вызываем вывод сообщения в консоль
-			ui.chooseMethod();
-
+		// Вызываем вывод сообщения в консоль
+		ui.chooseMethod();
+		while (true) {
 			// Получаем то, что ввел пользователь
-			String input = ui.getInput();
-			// Если введен "0", то возвращаем в предыдущее меню
-			if ("0".equalsIgnoreCase(input)) {
-				return null;
-			}
-
+			String choose = ui.line("");
 			try {
-				int method = Integer.parseInt(input);           // Преобразовываем в целое число для обработки
+				 // Преобразуем в целое число для обработки
 
-				switch (method) {
-					case 1:     // Выбираем ручной метод заполнения массива
-						array = handler.manual(selectedClass, arrayLength);   // Вызов функции с логикой работы интерфейса ручного ввода
-						break;
-					case 2:
+				switch (choose) {
+					case "1": // Выбираем ручной метод заполнения массива
+						array = handler.manual(selectedClass, arrayLength); // Вызов функции с логикой работы интерфейса ручного ввода
+						return array; // Возвращаем массив после заполнения
+					case "2":
 						array = switch (selectedClass) {
 							case "Car" -> RandomDataGenerator.generateRandomCars(arrayLength);
 							case "Book" -> RandomDataGenerator.generateRandomBooks(arrayLength);
-							case "RootVegetable" ->
-									RandomDataGenerator.generateRandomRootVegetable(arrayLength);
+							case "RootVegetable" -> RandomDataGenerator.generateRandomRootVegetable(arrayLength);
 							default -> null;
-						};// Выбираем генерацию случайных значений для заполнения массива
-						break;
-					case 3:     // Выбираем ввод данных из файла
+						}; // Выбираем генерацию случайных значений для заполнения массива
+						return array; // Возвращаем массив после заполнения
+					case "3": // Выбираем ввод данных из файла
 						array = DataLoader.loadFromFile(selectedClass, arrayLength);
-						break;
+						return array; // Возвращаем массив после заполнения
+					case "0":
+					{return null;
+					}
 					default:
-						return null; // Возврат в случае неверного ввода
+						System.out.println("Неверный ввод. Пожалуйста, выберите метод снова.");
+						break; // Продолжаем цикл, чтобы запросить ввод снова
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Неверный ввод. Введите число.");
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
 			}
-
-
-        return array;
-    }
+		}
+	}
 }
 
 

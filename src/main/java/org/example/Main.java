@@ -67,45 +67,55 @@ public class Main {
 				}
 
 				// Вызов функции с выбором метода заполнения данных
-
+				boolean method=true;
+				while(method){
 					Object[] array = select.methodSelected(selectedClass, inputHandler, desiredLength);
-					System.out.println("до сортировки");
-					for (Object item : array) {
-						System.out.println(item);
-					}
-					inputHandler.sorting(array, selectedClass);//сортируем
 
-					DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
-					boolean exit = false;   // Булевое значение для работы с выходом из цикла
-					while (!exit) {
-						// Вывод меню для выбора того, что нужно делать
-						ui.chooseOperation();
-						String choose = ui.line("");
-						switch (choose) {
-							case "1": {
-								Comparator<Object> handlerComparator = (Comparator<Object>) inputHandler.getComparator(selectedClass);
-								Object key = inputHandler.classExReturner(selectedClass);
-								System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
-								break;
-							}  // Поиск
-							case "2": { //
-								CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(reWriter(array, selectedClass));
-								System.out.println("Отсортирован!");
-								for (Object item : array) {
-									System.out.println(item);
+					if (array != null) {
+						System.out.println("до сортировки");
+						for (Object item : array) {
+							System.out.println(item);
+						}
+						inputHandler.sorting(array, selectedClass);//сортируем
+
+						DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
+						boolean exit = false;   // Булевое значение для работы с выходом из цикла
+						while (!exit) {
+							// Вывод меню для выбора того, что нужно делать
+							ui.chooseOperation();
+							String choose = ui.line("");
+							switch (choose) {
+								case "1": {
+									Comparator<Object> handlerComparator = (Comparator<Object>) inputHandler.getComparator(selectedClass);
+									Object key = inputHandler.classExReturner(selectedClass);
+									System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
+									break;
+								}  // Поиск
+								case "2": { //
+									CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(reWriter(array, selectedClass));
+									System.out.println("Отсортирован!");
+									for (Object item : array) {
+										System.out.println(item);
+									}
+									break;
 								}
-								break;
-							}
-							case "0": {   // Выход в предыдущее меню, если введен "0"
-								exit = true;
-							}
+								case "0": {   // Выход в предыдущее меню, если введен "0"
+									exit = true;
+								}
 
+							}
 						}
 					}
-			} catch (NumberFormatException e) {
-				System.out.println("Неверный ввод. Введите число.");
-			}
+					else method=false;
+				}
+				} catch(NumberFormatException e){
+					System.out.println("Неверный ввод. Введите число.");
+				}
+
 		} while (!input.equalsIgnoreCase("end"));
+
+
+
 		System.out.println("Выход...");
 		ui.close();
 	}
