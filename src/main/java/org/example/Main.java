@@ -4,7 +4,7 @@ import org.example.CustomClasses.Book;
 import org.example.CustomClasses.Car;
 import org.example.CustomClasses.RootVegetable;
 import org.example.MergeSort.CustomSorterEvenOdd;
-import org.example.ReadFile.DataWriter;
+import org.example.IO.DataWriter;
 import org.example.UI.InputHandler;
 import org.example.UI.SelectedHandler;
 import org.example.UI.UserInterface;
@@ -102,14 +102,14 @@ public class Main {
 
 						}
 					}
-
-
 			} catch (NumberFormatException e) {
 				System.out.println("Неверный ввод. Введите число.");
 			}
 		} while (!input.equalsIgnoreCase("end"));
 		System.out.println("Выход...");
+		ui.close();
 	}
+	
 private <T> T[] reWriter(Object[] array,String selectedClass)
 {
 	if(selectedClass=="Car")
