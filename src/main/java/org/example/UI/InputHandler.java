@@ -6,9 +6,7 @@ import org.example.CustomClasses.RootVegetable;
 import org.example.MergeSort.MergeSort;
 import org.example.MergeSort.SortContext;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 // Класс для непосредственной обработки данных
 public class InputHandler {
@@ -133,7 +131,7 @@ public class InputHandler {
 		RootVegetable root = null;
 
 		while (true) {
-			String input = ui.line("Введите параметры корнеплода (тип, вес, цвет)\n");
+			String input = ui.line("Введите параметры корнеплода\nтип, вес, цвет\n");
 			delimiter = input.split(","); // Разделяем ввод по запятой
 			// Проверяем, что введено ровно 3 параметра
 			if (delimiter.length != 3) {

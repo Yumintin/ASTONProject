@@ -75,7 +75,7 @@ public class SelectedHandler {
 		public void arrayOperations(UserInterface ui, InputHandler handler, SelectedHandler select, Object[]
 		array, String selectedClass) throws IOException {
 			if (array != null) {
-				System.out.println ("До сортировки");
+				System.out.println ("До сортировки:");
 				for (Object item : array) {
 					System.out.println (item);
 				}

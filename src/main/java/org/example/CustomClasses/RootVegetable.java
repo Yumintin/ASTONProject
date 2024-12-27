@@ -75,14 +75,16 @@ public class RootVegetable implements Sortable {
     public Double getSortField() {
         return weight;  // Возвращаем значение возраста для сортировки
     }
-    @Override
-    public String toString() {
-        return "RootVegetable{" +
-                "тип='" + type + '\'' +
-                ", вес=" + weight +
-                ", цвет='" + color + '\'' +
-                '}';
-    }
+
+	@Override
+	public String toString() {
+		return "RootVegetable {"		+								"\n"	+
+				"\tтип = '"				+	type		+	'\''	+	"\n"	+
+				"\tвес (кг) = '"		+	weight		+				"\n"	+
+				"\tцвет = "				+	color		+	'\''	+	"\n"	+
+				'}';
+	}
+
     public static Comparator<RootVegetable> getComparator() {
         return new RootVegetableComparator();
     }

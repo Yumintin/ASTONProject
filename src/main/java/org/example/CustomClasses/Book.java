@@ -76,15 +76,16 @@ public class Book implements Sortable {
         return pages;  // Возвращаем значение возраста для сортировки
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "автор='" + author + '\'' +
-                ", название='" + title + '\'' +
-                ", количествоСтраниц=" + pages +
-                '}';
-    }
-    public static Comparator<Book> getComparator() {
-        return new BookComparator();
-    }
+	@Override
+	public String toString() {
+		return "Book {"					+								"\n"	+
+				"\tавтор = '"			+	author		+	'\''	+	"\n"	+
+				"\tназвание = '"		+	title		+	'\''	+	"\n"	+
+				"\tстраницы = "			+	pages		+				"\n"	+
+				'}';
+	}
+	
+	public static Comparator<Book> getComparator() {
+		return new BookComparator();
+	}
 }

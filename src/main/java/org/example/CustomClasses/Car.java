@@ -74,14 +74,15 @@ public class Car implements Sortable {
     public Integer getSortField() {
         return year;  // Возвращаем значение возраста для сортировки
     }
-    @Override
-    public String toString() {
-        return "Car{" +
-                "мощность=" + power +
-                ", модель='" + model + '\'' +
-                ", годПроизводства=" + year +
-                '}';
-    }
+
+	@Override
+	public String toString() {
+		return "Car {"					+								"\n"	+
+				"\tмощность (л.с) = '"	+	power		+	'\''	+	"\n"	+
+				"\tмодель = '"			+	model		+	'\''	+	"\n"	+
+				"\tгод производства = "+	year		+				"\n"	+
+				'}';
+	}
 
     public static Comparator<Car> getComparator() {
         return new CarComparator();
