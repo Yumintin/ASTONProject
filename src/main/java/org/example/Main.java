@@ -1,11 +1,14 @@
 package org.example;
 import org.example.BinarySearch.BinarySearch;
+import org.example.CustomClasses.Car;
+import org.example.MergeSort.CustomSorterEvenOdd;
 import org.example.ReadFile.DataWriter;
 import org.example.UI.InputHandler;
 import org.example.UI.SelectedHandler;
 import org.example.UI.UserInterface;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -66,7 +69,8 @@ public class Main {
 				for (Object item : array) {
 					System.out.println(item);
 				}
-				inputHandler.sorting(array, selectedClass);//сортируем/
+				inputHandler.sorting(array, selectedClass);//сортируем
+
 				DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
 				boolean exit = false;   // Булевое значение для работы с выходом из цикла
 				while (!exit) {
@@ -80,7 +84,8 @@ public class Main {
 							System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
 						}  // Поиск
 						case "2": { // Выход в предыдущее меню, если введен "0"
-							CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(array);
+
+							//CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(cars);
 							System.out.println("Отсортирован!");
 							for (Object item : array) {
 								System.out.println(item);
@@ -102,8 +107,14 @@ public class Main {
 		} while (!input.equalsIgnoreCase("end"));
 		System.out.println("Выход...");
 	}
-
-
+	public static <T> T[] castObjectArrayToArray(Object[] objectArray, Class<T> clazz) {
+		@SuppressWarnings("unchecked")
+		T[] result = (T[]) Array.newInstance(clazz, objectArray.length);
+		for (int i = 0; i < objectArray.length; i++) {
+			result[i] = clazz.cast(objectArray[i]);
+		}
+		return result;
+	}
 	public static void main(String[] args) {
 		try {
 			Main app = new Main();
