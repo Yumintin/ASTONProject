@@ -1,0 +1,10 @@
+150, Sedan, 2021
+120, Hatchback, 2019
+200, SUV, 2023
+180, Coupe, 2020
+170, Convertible, 2022
+140, Wagon, 2018
+210, Pickup, 2024
+130, Compact, 2017
+160, Roadster, 2021
+190, Minivan, 2020

@@ -1,0 +1,10 @@
+Carrot, 1.2, Orange
+Potato, 0.8, Brown
+Beet, 1.5, Red
+Turnip, 1.3, White
+Radish, 0.6, Pink
+Parsnip, 1.0, Cream
+Sweet Potato, 2.1, Orange
+Yam, 1.8, Purple
+Ginger, 0.5, Yellow
+Onion, 0.9, White

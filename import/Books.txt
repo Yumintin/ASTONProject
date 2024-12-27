@@ -1,0 +1,10 @@
+Author A, Title A, 300
+Author B, Title B, 150
+Author C, Title C, 500
+Author D, Title D, 200
+Author E, Title E, 350
+Author F, Title F, 450
+Author G, Title G, 100
+Author H, Title H, 250
+Author I, Title I, 600
+Author J, Title J, 400
