@@ -2,7 +2,7 @@ package org.example;
 import org.example.BinarySearch.BinarySearch;
 import org.example.CustomClasses.Car;
 import org.example.MergeSort.CustomSorterEvenOdd;
-import org.example.ReadFile.DataWriter;
+import org.example.IO.DataWriter;
 import org.example.UI.InputHandler;
 import org.example.UI.SelectedHandler;
 import org.example.UI.UserInterface;
