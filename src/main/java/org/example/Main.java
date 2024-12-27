@@ -1,72 +1,115 @@
 package org.example;
+import org.example.BinarySearch.BinarySearch;
+import org.example.ReadFile.DataWriter;
+import org.example.UI.InputHandler;
+import org.example.UI.SelectedHandler;
+import org.example.UI.UserInterface;
+
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        {
-            /* /////////////////////КАК ЧИТАТЬ С ФАЙЛА
-            Car[] cars = (Car[]) DataLoader.loadFromFile("car"); // Загрузка данных для Car
-            for (Car car : cars) {
-                System.out.println(car); // Печатаем данные для проверки
-            }
-            Book[] books = (Book[]) DataLoader.loadFromFile("book"); // Загрузка данных для Book
-            for (Book book : books) {
-                System.out.println(book); // Печатаем данные для проверки
-            }
+	public void initialize() throws IOException {
 
-            RootVegetable[] rootCrops = (RootVegetable[]) DataLoader.loadFromFile("rootvegetable"); // Загрузка данных для RootVegetable
-            for (RootVegetable rootCrop : rootCrops) {
-                System.out.println(rootCrop); // Печатаем данные для проверки
-            }
-             */
+		System.out.println("Инициализация интерфейса программы...");
+		UserInterface ui = new UserInterface();
+		InputHandler inputHandler = new InputHandler(ui);
+		SelectedHandler select = new SelectedHandler(ui);
+		DataWriter.write("", "true");
+		String input;
 
-            /* ///////////////////////РАНДОМНОЕ ЗАПОЛНЕНИЕ
-            Car[] cars = RandomDataGenerator.generateRandomCars(5);
-            for (Car car : cars) {
-                System.out.println(car); // Печатаем данные для проверки
-            }*/
-            /* //////////////////////////СОРТИРОВКА
-            Car[] cars = {   //создаем массив
-                    new Car.Builder().setModel("Ford").setPower(120).setYear(2020).build(),
-                    new Car.Builder().setModel("Toyota").setPower(240).setYear(2010).build(),
-                    new Car.Builder().setModel("BMW").setPower(300).setYear(2014).build()
-            };
-         //выбираем компаратор для сравнения
-            Comparator<Car> carComparator = Car.getComparator();
+		System.out.println("\nДобро пожаловать в программу \"Aston\"");
+		System.out.println("Для выхода из программы введите end");
+		do {
+			// Вызов сообщений в консоль для выбора класса
+			ui.chooseClass();
+			// Обрабатываем пользовательский ввод
+			input = ui.getInput();
 
-            // Создание контекста сортировки и задания стратегии
-            SortContext<Car> sortContext = new SortContext<>();
-            sortContext.setStrategy(new MergeSort<>());
+			// Если введен "end" - выходим из программы
+			if (input.equalsIgnoreCase("end")) {
+				break;
+			}
+			try {
+				// Обрабатываем ввод и определяем какой класс был выбран
+				int operation = Integer.parseInt(input);
+				String selectedClass = ui.classSelected(operation);
 
-            // Вывод массива до сортировки
-            System.out.println("До сортировки:");
-            for (Car car : cars) {
-                System.out.println(car); // Печатаем данные для проверки
-            }
-            // Выполнение сортировки
-            sortContext.executeSort(cars, carComparator);
+				// Если пусто, то повтрно выводим меню
+				if (selectedClass.isEmpty()) {
+					continue;
+				}
+				System.out.println("Был выбран класс: " + selectedClass +
+						"\n=========================");
 
-            // Вывод массива после сортировки
-            System.out.println("\nПосле сортировки:");
-            for (Car car : cars) {
-                System.out.println(car); // Печатаем данные для проверки
-            }
-            /* ////////////////////////////ПОИСК БИНАРНЫЙ
-            // Создаем и сортируем массив автомобилей
-            Car[] cars = {
-                    new Car.Builder().setModel("Ford").setPower(120).setYear(2020).build(),
-                    new Car.Builder().setModel("Toyota").setPower(240).setYear(2010).build(),
-                    new Car.Builder().setModel("BMW").setPower(300).setYear(2014).build()
-            };
+				Scanner scanner = new Scanner(System.in);
+				int desiredLength = -1; // Инициализируем переменную для длины массива
+				// Цикл для запроса корректного ввода
+				while (desiredLength < 0) {
+					System.out.print("Введите размер массива (должен быть неотрицательным): ");
+					if (scanner.hasNextInt()) {
+						desiredLength = scanner.nextInt();
+						if (desiredLength < 0) {
+							System.out.println("Размер массива не может быть отрицательным. Попробуйте снова.");
+						}
+					} else {
+						System.out.println("Некорректный ввод. Пожалуйста, введите целое число.");
+						scanner.next(); // Очищаем некорректный ввод
+					}
+				}
 
-            // Компаратор для сравнения объектов Car. В каждом классе лежит гет для своего компоратора
-            Comparator<Car> carComparator =Car.getComparator();
+				// Вызов функции с выбором метода заполнения данных
+				Object[] array = select.methodSelected(selectedClass, inputHandler, desiredLength);
+				System.out.println("до сортировки");
+				for (Object item : array) {
+					System.out.println(item);
+				}
+				inputHandler.sorting(array, selectedClass);//сортируем/
+				DataWriter.write(InputHandler.getDataAsString(array), "");////////////////////////////////////////СДЕЛАЛ МЕТОД СТАТИК ВДРУГ ЧТО_ТО СЛОМАЛ ПРОВЕРЬ
+				boolean exit = false;   // Булевое значение для работы с выходом из цикла
+				while (!exit) {
+					// Вывод меню для выбора того, что нужно делать
+					ui.chooseOperation();
+					String choose = ui.line("");
+					switch (choose) {
+						case "1": {
+							Comparator<Object> handlerComparator = (Comparator<Object>) inputHandler.getComparator(selectedClass);
+							Object key = inputHandler.classExReturner(selectedClass);
+							System.out.println("Индекс найденного элемента: " + BinarySearch.binarySearch(array, key, handlerComparator)); //
+						}  // Поиск
+						case "2": { // Выход в предыдущее меню, если введен "0"
+							CustomSorterEvenOdd.sortEvenNumbersAfterMergeSort(array);
+							System.out.println("Отсортирован!");
+							for (Object item : array) {
+								System.out.println(item);
+							}
+							return;
+						}
+						case "0": {   // Выход в предыдущее меню, если введен "0"
+							exit = true;
+							break;
+						}
+						default:    // Повторный вызов при невалидном вводе
+							return;
+					}
+				}
 
-            // Поиск автомобиля с точным значением
-            Car searchKeyCar = new Car.Builder().setModel("Toyota").setPower(240).setYear(2010).build();
-            int carIndex = BinarySearch.binarySearch(cars, searchKeyCar, carComparator);
+			} catch (NumberFormatException e) {
+				System.out.println("Неверный ввод. Введите число.");
+			}
+		} while (!input.equalsIgnoreCase("end"));
+		System.out.println("Выход...");
+	}
 
-            System.out.println("Индекс найденного автомобиля: " + carIndex); // Ожидаемый вывод: "1"*/
 
-        }
-    }
+	public static void main(String[] args) {
+		try {
+			Main app = new Main();
+			app.initialize();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
 }

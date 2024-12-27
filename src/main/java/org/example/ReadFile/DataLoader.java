@@ -8,7 +8,7 @@ import java.nio.file.*;
 import javax.swing.*;
 
 public class DataLoader {// Метод для загрузки данных из файла в зависимости от типа объекта
-    public static Object[] loadFromFile(String type) {
+    public static Object[] loadFromFile(String type, int arrayLength) {
         File file = selectFile(); // Вызываем метод для выбора файла
         if (file == null) return new Object[0]; // Если файл не выбран, возвращаем пустой массив
 
@@ -19,8 +19,8 @@ public class DataLoader {// Метод для загрузки данных из
             // Создаем массив конкретного типа
             switch (type.toLowerCase()) {
                 case "car":
-                    Car[] cars = new Car[lines.length];
-                    for (int i = 0; i < lines.length; i++) {
+                    Car[] cars = new Car[arrayLength];
+                    for (int i = 0; i < arrayLength; i++) {
                         String[] parts = lines[i].split(",");
                         cars[i] = new Car.Builder()
                                 .setPower(Integer.parseInt(parts[0].trim()))
@@ -31,8 +31,8 @@ public class DataLoader {// Метод для загрузки данных из
                     return cars;
 
                 case "book":
-                    Book[] books = new Book[lines.length];
-                    for (int i = 0; i < lines.length; i++) {
+                    Book[] books = new Book[arrayLength];
+                    for (int i = 0; i < arrayLength; i++) {
                         String[] parts = lines[i].split(",");
                         books[i] = new Book.Builder()
                                 .setAuthor(parts[0].trim())
@@ -43,8 +43,8 @@ public class DataLoader {// Метод для загрузки данных из
                     return books;
 
                 case "rootvegetable":
-                    RootVegetable[] rootCrops = new RootVegetable[lines.length];
-                    for (int i = 0; i < lines.length; i++) {
+                    RootVegetable[] rootCrops = new RootVegetable[arrayLength];
+                    for (int i = 0; i < arrayLength; i++) {
                         String[] parts = lines[i].split(",");
                         rootCrops[i] = new RootVegetable.Builder()
                                 .setType(parts[0].trim())
